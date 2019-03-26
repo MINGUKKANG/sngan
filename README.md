@@ -1,0 +1,2 @@
+# sngan
+spectral normalization gan

@@ -36,9 +36,13 @@ class batch_manager(object):
 
     def shuffle_samples(self):
         num_samples = len(self.data)
-        indices = np.random.permutation(np.arange(num_samples))
+        indices = np.random.permutation(np.arange(num_samples//4))
+        self.data = np.split(self.data, 4)
+        self.labels = np.split(self.labels, 4)
         self.data = self.data[indices]
         self.labels = self.labels[indices]
+        self.data = np.concatenate(self.data, axis = 0)
+        self.labels = np.concatenate(self.labels, axis =0)
 
     def get_next_batch(self):
         num_sample_left = len(self.data) - self.next_batch_pointer
